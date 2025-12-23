@@ -3,13 +3,14 @@ import os
 
 def download(url: str, download_path: str) -> None:
     home = os.path.expanduser("~")
+    local_ffmpeg = os.path.join(home, ".local", "bin", "ffmpeg")
     
     ydl_opts = {
         # 1. Correct the key to 'cookiefile'
         'cookiefile': 'cookies.txt', 
         
         # 2. Point to the FFmpeg you installed via Makefile
-        'ffmpeg_location': f'{home}/.local/bin/ffmpeg',
+        'ffmpeg_location': local_ffmpeg,
         
         'format': 'best',
         'outtmpl': download_path,
