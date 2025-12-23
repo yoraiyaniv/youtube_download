@@ -5,7 +5,7 @@ TEMP_DIR = ffmpeg_tmp
 set:
 	pip install Flask
 	pip install yt-dlp
-	pip install --user yt-dlp-get-oauth2
+	pip install yt-dlp-get-oauth2
 
 	mkdir -p $(BIN_DIR)
 
