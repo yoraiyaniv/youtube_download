@@ -4,8 +4,9 @@ FFMPEG_URL = https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-stat
 set:
 	pip install Flask
 	pip install yt-dlp
-	mkdir -p $(BIN_DIR)
+	mkdir -p $(PROJECT_BIN)
 	curl -L $(FFMPEG_URL) -o ffmpeg.tar.xz
-	tar -xvf ffmpeg.tar.xz --strip-components=1 -C $(BIN_DIR)
-	chmod +x $(BIN_DIR)/ffmpeg $(BIN_DIR)/ffprobe
+	tar -xvf ffmpeg.tar.xz --strip-components=1 -C $(PROJECT_BIN)
+	chmod +x $(PROJECT_BIN)/ffmpeg $(PROJECT_BIN)/ffprobe
 	rm ffmpeg.tar.xz
+	@echo "FFmpeg installed to: $(PROJECT_BIN)/ffmpeg"
