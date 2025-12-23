@@ -1,4 +1,4 @@
-BIN_DIR = $(HOME)/.local/bin
+PROJECT_BIN = $(shell pwd)/bin
 FFMPEG_URL = https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
 
 set:
