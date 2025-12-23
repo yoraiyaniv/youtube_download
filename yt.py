@@ -2,31 +2,25 @@ import yt_dlp
 import os
 
 def download(url: str, download_path: str) -> None:
-    # Get home directory for ffmpeg path if needed
     home = os.path.expanduser("~")
     
     ydl_opts = {
-        # 1. THE SMART FIX: Use OAuth2 instead of a cookie file
+        # USE THE BUILT-IN OAUTH2 (No plugin required)
         'username': 'oauth2',
         'password': '', 
         
-        # 2. Add client impersonation to bypass bot checks
+        # Use the 'tv' client - this is the most reliable for OAuth2
         'extractor_args': {
             'youtube': {
-                'player_client': ['ios', 'web']
+                'player_client': ['tv'],
             }
         },
         
-        # 3. Reference your local ffmpeg from your Makefile install
         'ffmpeg_location': f'{home}/.local/bin/ffmpeg',
-        
         'format': 'best',
         'outtmpl': download_path,
-        'noplaylist': True,
+        'verbose': True, # CRITICAL: This ensures the code shows in your logs
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        try:
-            ydl.download([url])
-        except Exception as e:
-            print(f"Error during download: {e}")
+        ydl.download([url])
