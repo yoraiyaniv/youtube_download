@@ -5,21 +5,18 @@ def download(url: str, download_path: str) -> None:
     home = os.path.expanduser("~")
     
     ydl_opts = {
-        # USE THE BUILT-IN OAUTH2 (No plugin required)
-        'username': 'oauth2',
-        'password': '', 
+        # 1. Correct the key to 'cookiefile'
+        'cookiefile': 'cookies.txt', 
         
-        # Use the 'tv' client - this is the most reliable for OAuth2
-        'extractor_args': {
-            'youtube': {
-                'player_client': ['tv'],
-            }
-        },
-        
+        # 2. Point to the FFmpeg you installed via Makefile
         'ffmpeg_location': f'{home}/.local/bin/ffmpeg',
+        
         'format': 'best',
         'outtmpl': download_path,
-        'verbose': True, # CRITICAL: This ensures the code shows in your logs
+        'noplaylist': True,
+        
+        # 3. Impersonate a browser to prevent immediate cookie invalidation
+        'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
